@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Majestic Flats — Modern Apartments</title>
+  <meta name="description" content="Majestic Flats — Contemporary apartments, premium amenities, and easy booking." />
+  <style>
+    /* ---------- Variables ---------- */
+    :root{
+      --accent:#0f4c81;       /* deep indigo/blue */
+      --accent-2:#2b6cb0;    /* lighter blue */
+      --muted:#6b7280;       /* gray */
+      --bg:#f8fafc;          /* page bg */
+      --card:#ffffff;
+      --radius:12px;
+      --maxw:1200px;
+    }
+    /* ---------- Base ---------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:var(--accent); text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+    h1,h2,h3{margin:0 0 .5rem 0}
+    p{margin:0 0 1rem 0; color:var(--muted)}
+    button{cursor:pointer}
+
+    /* ---------- Header ---------- */
+    header{background:linear-gradient(90deg,var(--card),#ffffff); position:sticky; top:0; z-index:60; border-bottom:1px solid rgba(15,76,129,0.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; height:72px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; color:var(--accent)}
+    .brand .logo{width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:white; font-weight:800}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0; align-items:center}
+    .cta{background:var(--accent); color:white; padding:10px 14px; border-radius:10px; font-weight:600; box-shadow:0 6px 18px rgba(15,76,129,0.12)}
+    .hamburger{display:none; border:0; background:transparent; font-size:22px}
+
+    /* ---------- Hero ---------- */
+    .hero{padding:48px 0 36px; display:grid; grid-template-columns:1fr 460px; gap:32px; align-items:center}
+    .hero-card{background:linear-gradient(180deg,#fff, #fbfdff); border-radius:var(--radius); padding:28px; box-shadow:0 8px 30px rgba(11,20,30,0.04); border:1px solid rgba(15,76,129,0.04)}
+    .kicker{display:inline-block; background:rgba(11,20,30,0.04); color:var(--accent); padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px}
+    .price{font-size:22px; color:var(--accent); font-weight:700}
+    .search-row{display:flex; gap:8px; margin-top:12px}
+    .input{flex:1; padding:12px 14px; border-radius:10px; border:1px solid #e6edf3; background:white}
+
+    /* ---------- Features / Amenities ---------- */
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .feature{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 20px rgba(11,20,30,0.04); border:1px solid rgba(11,20,30,0.03)}
+    .feature h4{color:var(--accent); margin-bottom:6px}
+
+    /* ---------- Listings ---------- */
+    .listings{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .property{background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(11,20,30,0.04)}
+    .prop-top{position:relative}
+    .prop-badge{position:absolute; left:12px; top:12px; background:rgba(255,255,255,0.9); padding:6px 10px; border-radius:999px; font-weight:700; color:var(--accent); border:1px solid rgba(15,76,129,0.06)}
+    .prop-body{padding:14px}
+    .meta{color:var(--muted); font-size:14px}
+
+    /* ---------- Floorplans & Gallery ---------- */
+    .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .floorplan{background:linear-gradient(180deg,#fff,#fbfdff); border-radius:12px; padding:12px; text-align:center; border:1px solid rgba(11,20,30,0.03)}
+    .gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+
+    /* ---------- Contact ---------- */
+    .contact{background:linear-gradient(180deg,#ffffff,#fbfdff); padding:22px; border-radius:12px; border:1px solid rgba(11,20,30,0.03)}
+    label{display:block; font-weight:600; font-size:14px; margin-bottom:6px}
+    .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    textarea{min-height:120px; resize:vertical}
+
+    /* ---------- Footer ---------- */
+    footer{padding:28px 0; color:var(--muted); border-top:1px solid rgba(11,20,30,0.03); margin-top:40px}
+
+    /* ---------- Utilities ---------- */
+    .section{padding:28px 0}
+    .section-title{display:flex; justify-content:space-between; align-items:end; gap:12px; margin-bottom:14px}
+    .small{font-size:13px}
+    .center{display:flex; align-items:center; justify-content:center}
+    .chip{display:inline-block; background:rgba(15,76,129,0.06); color:var(--accent); padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr; padding-top:28px}
+      .listings{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+      .two-col{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 640px){
+      .nav ul{display:none}
+      .hamburger{display:block}
+      .listings{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:1fr}
+      .hero-card{order:2}
+    }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox{
+      position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:80;
+    }
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92%; max-height:86%; border-radius:8px}
+    .close-x{position:absolute; right:20px; top:20px; background:rgba(255,255,255,0.95); border-radius:999px; padding:8px 12px; font-weight:700; color:#111}
+
+    /* small helper */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">MF</div>
+        <div>
+          <div style="font-size:16px">Majestic Flats</div>
+          <div style="font-size:12px;color:var(--muted)">Premium Apartments</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#listings">Listings</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact" class="cta">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button aria-label="open menu" class="hamburger" id="btn-hamb">&#9776;</button>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobile-menu" style="display:none; background:white; border-top:1px solid rgba(11,20,30,0.04)">
+      <div class="container" style="padding:12px 20px;">
+        <a href="#home" style="display:block; padding:10px 0">Home</a>
+        <a href="#listings" style="display:block; padding:10px 0">Listings</a>
+        <a href="#amenities" style="display:block; padding:10px 0">Amenities</a>
+        <a href="#gallery" style="display:block; padding:10px 0">Gallery</a>
+        <a href="#contact" style="display:block; padding:10px 0">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <!-- HERO -->
+    <section class="hero section">
+      <div>
+        <span class="kicker">New Launch • Ready to Move</span>
+        <h1 style="font-size:36px; margin-top:14px">Majestic Flats — Contemporary Living in the Heart of City</h1>
+        <p class="muted" style="max-width:640px; margin-top:12px">
+          Thoughtfully designed 1, 2 & 3 BHK apartments with premium amenities, landscaped gardens, clubhouse, and secure living.
+        </p>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="chip">Starting ₹ 35 Lakh</div>
+          <div class="chip">Possession: Dec 2025</div>
+          <div class="chip">Open: Mon - Sat (10am - 6pm)</div>
+        </div>
+
+        <div style="margin-top:20px" class="hero-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div class="price">Book a site visit — ₹500 booking refundable</div>
+              <div class="muted small">Fill form and our sales team will call to confirm visit</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700; font-size:18px">Contact</div>
+              <div class="muted">+91 98765 43210</div>
+            </div>
+          </div>
+
+          <form id="hero-form" style="margin-top:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <input class="input" name="name" placeholder="Full name" required />
+            <input class="input" name="phone" placeholder="Phone number" required />
+            <button class="cta" type="submit">Request Visit</button>
+            <div style="width:100%; font-size:13px; color:var(--muted); margin-top:8px">We respect your privacy — we only use your details to contact you about Majestic Flats.</div>
+          </form>
+        </div>
+      </div>
+
+      <aside>
+        <div style="border-radius:12px; overflow:hidden; box-shadow:0 12px 30px rgba(11,20,30,0.06)">
+          <img src="images/hero.jpg" alt="Majestic flats hero image" style="height:100%; width:100%; object-fit:cover; display:block" />
+        </div>
+
+        <div style="margin-top:14px" class="hero-card">
+          <div style="display:flex; justify-content:space-between; gap:12px">
+            <div>
+              <div style="font-weight:700">Available Units</div>
+              <div class="muted small">1, 2 & 3 BHK • Ready to move</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700; font-size:16px">₹35L — ₹90L</div>
+              <div class="muted small">All taxes extra</div>
+            </div>
+          </div>
+          <div style="margin-top:10px; display:flex; gap:8px;">
+            <button class="chip" style="border-radius:8px">Download Brochure</button>
+            <button class="chip" style="border-radius:8px">Virtual Tour</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- AMENITIES -->
+    <section id="amenities" class="section">
+      <div class="section-title">
+        <h2>World-class Amenities</h2>
+        <div class="small muted">Designed for comfort, convenience & safety</div>
+      </div>
+
+      <div class="grid-3">
+        <div class="feature">
+          <h4>Clubhouse & Gym</h4>
+          <p class="muted">Fully equipped gym, indoor games, and multipurpose hall for events.</p>
+        </div>
+        <div class="feature">
+          <h4>Swimming Pool</h4>
+          <p class="muted">Temperature-controlled pool with separate kids area and lounging deck.</p>
+        </div>
+        <div class="feature">
+          <h4>Landscaped Gardens</h4>
+          <p class="muted">Walking trails, children’s play area, and open-air seating.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTINGS -->
+    <section id="listings" class="section">
+      <div class="section-title">
+        <h2>Featured Apartments</h2>
+        <div class="small muted">Choose from our most popular layouts</div>
+      </div>
+
+      <div class="listings" id="listings-grid">
+        <!-- property 1 -->
+        <article class="property" data-id="p1">
+          <div class="prop-top">
+            <img src="images/apt1.jpg" alt="2 BHK apartment" />
+            <div class="prop-badge">2 BHK • 870 sqft</div>
+          </div>
+          <div class="prop-body">
+            <h3>Sunrise View — 2 BHK</h3>
+            <div class="meta">Sector 12 • ₹45,00,000</div>
+            <p class="muted" style="margin-top:10px">Spacious 2 BHK with ample natural light, modular kitchen, and balcony overlooking the park.</p>
+            <div style="margin-top:12px; display:flex; gap:8px; align-items:center">
+              <button class="chip" onclick="openLightbox('images/apt1.jpg')">View</button>
+              <button class="chip" onclick="enquire('Sunrise View - 2 BHK')">Enquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- property 2 -->
+        <article class="property" data-id="p2">
+          <div class="prop-top">
+            <img src="images/apt2.jpg" alt="3 BHK apartment" />
+            <div class="prop-badge">3 BHK • 1250 sqft</div>
+          </div>
+          <div class="prop-body">
+            <h3>Prime Block — 3 BHK</h3>
+            <div class="meta">Sector 12 • ₹78,00,000</div>
+            <p class="muted" style="margin-top:10px">Family oriented 3 BHK with attached balconies, master walk-in, and 2 covered parking slots.</p>
+            <div style="margin-top:12px; display:flex; gap:8px; align-items:center">
+              <button class="chip" onclick="openLightbox('images/apt2.jpg')">View</button>
+              <button class="chip" onclick="enquire('Prime Block - 3 BHK')">Enquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- property 3 -->
+        <article class="property" data-id="p3">
+          <div class="prop-top">
+            <img src="images/apt3.jpg" alt="1 BHK apartment" />
+            <div class="prop-badge">1 BHK • 540 sqft</div>
+          </div>
+          <div class="prop-body">
+            <h3>Cozy Nest — 1 BHK</h3>
+            <div class="meta">Sector 12 • ₹35,00,000</div>
+            <p class="muted" style="margin-top:10px">Ideal for young professionals — smart layout and low maintenance charges.</p>
+            <div style="margin-top:12px; display:flex; gap:8px; align-items:center">
+              <button class="chip" onclick="openLightbox('images/apt3.jpg')">View</button>
+              <button class="chip" onclick="enquire('Cozy Nest - 1 BHK')">Enquire</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FLOORPLANS & GALLERY -->
+    <section class="section">
+      <div class="section-title">
+        <h2>Floor Plans & Gallery</h2>
+        <div class="small muted">Detailed layouts and snapshots from the site</div>
+      </div>
+
+      <div class="two-col" style="margin-bottom:18px">
+        <div class="floorplan">
+          <h3>2 BHK — 870 sqft</h3>
+          <img src="images/floorplan-2bhk.jpg" alt="2 bhk floorplan" style="width:100%; height:260px; object-fit:cover; border-radius:8px; margin-top:10px" />
+        </div>
+        <div class="floorplan">
+          <h3>3 BHK — 1250 sqft</h3>
+          <img src="images/floorplan-3bhk.jpg" alt="3 bhk floorplan" style="width:100%; height:260px; object-fit:cover; border-radius:8px; margin-top:10px" />
+        </div>
+      </div>
+
+      <div id="gallery" class="gallery">
+        <img src="images/gallery1.jpg" alt="gallery 1" style="cursor:pointer" onclick="openLightbox('images/gallery1.jpg')" />
+        <img src="images/gallery2.jpg" alt="gallery 2" style="cursor:pointer" onclick="openLightbox('images/gallery2.jpg')" />
+        <img src="images/gallery3.jpg" alt="gallery 3" style="cursor:pointer" onclick="openLightbox('images/gallery3.jpg')" />
+        <img src="images/gallery4.jpg" alt="gallery 4" style="cursor:pointer" onclick="openLightbox('images/gallery4.jpg')" />
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-title">
+        <h2>Contact & Bookings</h2>
+        <div class="small muted">We will respond within one business day</div>
+      </div>
+
+      <div class="two-col">
+        <div class="contact">
+          <form id="contact-form">
+            <div class="form-grid">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" class="input" required />
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" class="input" required />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" class="input" type="email" required />
+              </div>
+              <div>
+                <label for="budget">Budget (approx.)</label>
+                <input id="budget" name="budget" class="input" placeholder="₹ 30L - 80L" />
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" class="input" placeholder="Tell us your preferred unit, time to visit, or any question..."></textarea>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:10px; align-items:center">
+              <button class="cta" type="submit">Send Enquiry</button>
+              <div class="muted small">Or call us: +91 98765 43210</div>
+            </div>
+          </form>
+        </div>
+
+        <div style="background:var(--card); border-radius:12px; padding:18px; box-shadow:0 8px 24px rgba(11,20,30,0.04)">
+          <h3>Office Address</h3>
+          <p class="muted">Majestic Flats Sales Office, Sector 12, City — 600001</p>
+
+          <h4 style="margin-top:14px">Timings</h4>
+          <p class="muted">Mon - Sat: 10:00 AM - 6:00 PM</p>
+
+          <h4 style="margin-top:14px">Quick Links</h4>
+          <ul style="padding-left:18px; color:var(--muted)">
+            <li>Brochure PDF</li>
+            <li>Virtual Tour</li>
+            <li>Payment Plans</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+        <div>
+          <div style="font-weight:700">Majestic Flats</div>
+          <div class="muted small">© <span id="year"></span> Majestic Builders. All rights reserved.</div>
+        </div>
+        <div class="muted small">Designed & maintained by Majestic Sales • Privacy • Terms</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <button class="close-x" onclick="closeLightbox(event)">✕</button>
+    <img id="lightbox-img" src="" alt="preview" />
+  </div>
+
+  <script>
+    // simple mobile menu toggle
+    const btn = document.getElementById('btn-hamb');
+    const mobile = document.getElementById('mobile-menu');
+    btn.addEventListener('click', ()=> {
+      mobile.style.display = (mobile.style.display === 'none' || mobile.style.display === '') ? 'block' : 'none';
+    });
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightbox handlers
+    function openLightbox(src){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lb.classList.add('open');
+    }
+    function closeLightbox(e){
+      if (e.target.id === 'lightbox' || e.target.classList.contains('close-x')) {
+        document.getElementById('lightbox').classList.remove('open');
+      }
+    }
+
+    // Basic client-side form handling (hero & contact)
+    document.getElementById('hero-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      // In real project -> send to backend via fetch/axios
+      alert('Thanks ' + fd.get('name') + '! We will call you at ' + fd.get('phone') + ' to confirm a visit.');
+      e.target.reset();
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      // Basic validation
+      if (!fd.get('name') || !fd.get('phone') || !fd.get('email')) {
+        alert('Please fill name, phone & email.');
+        return;
+      }
+      // Simulate send
+      alert('Thank you! Your enquiry has been received. We will contact you soon.');
+      e.target.reset();
+    });
+
+    // quick enquire button
+    function enquire(title){
+      const name = prompt('Enter your full name to enquire about: ' + title);
+      if (name) alert('Thanks ' + name + '! Our sales team will contact you about: ' + title);
+    }
+  </script>
+</body>
+</html>
