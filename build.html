@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SilverRise Residences — Modern Living</title>
+  <meta name="description" content="SilverRise Residences — stylish apartments, smart amenities, prime location.">
+  <style>
+    /* ====== Reset & base ====== */
+    :root{
+      --accent:#2b6cff; --muted:#6b7280; --bg:#f7f9fc; --card:#ffffff; --glass: rgba(255,255,255,0.6);
+      --radius:12px; --maxW:1100px; --gap:24px; --shadow: 0 10px 30px rgba(13,38,75,0.08);
+      font-family: Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    }
+    *{box-sizing:border-box} html,body{height:100%} body{margin:0;background:linear-gradient(180deg,var(--bg),#eef4ff);color:#0f172a}
+    a{color:var(--accent);text-decoration:none}
+
+    /* ====== Layout ====== */
+    .container{max-width:var(--maxW);margin:32px auto;padding:0 20px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6dd3ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav{display:flex;gap:16px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow);border:0;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);padding:8px 12px;border-radius:10px}
+
+    /* ====== Hero ====== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:18px}
+    .hero-card{background:var(--card);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    .features{display:flex;gap:12px;margin-top:8px}
+    .feat{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--glass);backdrop-filter:blur(6px)}
+
+    /* Search card */
+    .search{background:linear-gradient(90deg,#fff,#fbfdff);padding:18px;border-radius:14px}
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,select{padding:10px 12px;border-radius:10px;border:1px solid #e6eef8;background:#fff}
+
+    /* Listings grid */
+    .listings{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .media{height:160px;background-size:cover;background-position:center}
+    .card-body{padding:14px}
+    .price{font-weight:700}
+    .meta{display:flex;gap:12px;color:var(--muted);font-size:13px;margin-top:8px}
+
+    /* Gallery/Info */
+    .section{margin:36px 0}
+    .grid-2{display:grid;grid-template-columns:1fr 420px;gap:26px}
+    .amenities{display:flex;flex-wrap:wrap;gap:12px}
+    .amenity{background:var(--glass);padding:10px 12px;border-radius:10px}
+
+    footer{margin:40px 0 60px;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero, .grid-2{grid-template-columns:1fr}
+      .listings{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      .listings{grid-template-columns:1fr}
+      header{gap:10px}
+      .brand span{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">SR</div>
+        <div>
+          <div style="font-weight:700">SilverRise Residences</div>
+          <div style="font-size:12px;color:var(--muted)">Modern apartments · Smart amenities</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#listings">Units</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#gallery">Gallery</a>
+        <button class="btn" onclick="scrollToContact()">Enquire</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="hero-card">
+          <h1>Live Elevated — Apartments designed for the way you live</h1>
+          <p class="lead">Spacious 1–3 BHK units, rooftop garden, co-working lounges and a fitness studio — all 7 minutes from Oakwood Metro.</p>
+          <div class="features">
+            <div class="feat">🏡 150+ families</div>
+            <div class="feat">🕒 24/7 security</div>
+            <div class="feat">🌿 Green terrace</div>
+          </div>
+
+          <div style="margin-top:18px">
+            <h3 style="margin:0 0 8px">Quick search</h3>
+            <div class="search">
+              <div class="field"><label for="type">Unit type</label><select id="type"><option>Any</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option></select></div>
+              <div class="field"><label for="budget">Max budget (₹)</label><input id="budget" placeholder="e.g. 1500000"></div>
+              <button class="btn" onclick="filterListings()">Find units</button>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="hero-card">
+            <h4 style="margin-top:0">Featured Unit</h4>
+            <div style="height:180px;background-image:url('https://images.unsplash.com/photo-1560184897-6a6f6a6f6a6f?auto=format&fit=crop&w=800&q=60');background-size:cover;border-radius:10px"></div>
+            <div style="margin-top:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>2 BHK Skyline</strong><div style="font-size:13px;color:var(--muted)">1200 sq.ft</div></div><div class="price">₹ 28,50,000</div></div>
+              <div class="meta"><div>2 Beds</div><div>2 Baths</div><div>Balcony</div></div>
+              <div style="margin-top:12px;display:flex;gap:8px"><button class="btn">Book visit</button><button class="ghost">Download brochure</button></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section id="listings" class="section">
+        <h2 style="margin-bottom:8px">Available units</h2>
+        <p style="margin:0 0 16px;color:var(--muted)">Handpicked units with flexible financing and immediate possession options.</p>
+        <div class="listings" id="cards"></div>
+      </section>
+
+      <section id="amenities" class="section grid-2">
+        <div>
+          <h3>Amenities</h3>
+          <p class="lead">Thoughtful amenities to support work, play and wellbeing.</p>
+          <div class="amenities">
+            <div class="amenity">🏋️ Fitness studio</div>
+            <div class="amenity">📚 Co-working lounge</div>
+            <div class="amenity">🛝 Kids play area</div>
+            <div class="amenity">🌿 Rooftop garden</div>
+            <div class="amenity">🚗 Covered parking</div>
+            <div class="amenity">🔒 24/7 security</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(90deg,#fff,#f9fbff);padding:18px;border-radius:12px">
+          <h4 style="margin-top:0">Why SilverRise?</h4>
+          <ul style="margin-top:8px;color:var(--muted)">
+            <li>Walkable neighbourhood with cafes & grocery stores</li>
+            <li>Green-conscious design and rainwater harvesting</li>
+            <li>Community events and monthly farmer's market</li>
+          </ul>
+          <div style="margin-top:12px"><strong>Starting price</strong> <div style="font-size:20px;margin-top:6px">₹ 14,00,000</div></div>
+        </div>
+      </section>
+
+      <section id="gallery" class="section">
+        <h3>Gallery</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+          <div style="height:130px;background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=60');background-size:cover"></div>
+          <div style="height:130px;background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=60');background-size:cover"></div>
+          <div style="height:130px;background-image:url('https://images.unsplash.com/photo-1598300103359-7a6f2b4f7c66?auto=format&fit=crop&w=800&q=60');background-size:cover"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h3>Contact & Enquiry</h3>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+          <div style="flex:1;min-width:280px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+            <form id="contactForm" onsubmit="submitEnquiry(event)">
+              <div class="field"><label>Name</label><input id="cname" required></div>
+              <div class="field"><label>Email</label><input id="cemail" type="email" required></div>
+              <div class="field"><label>Message</label><input id="cmsg"></div>
+              <button class="btn" type="submit">Send enquiry</button>
+            </form>
+          </div>
+          <div style="flex:1;min-width:280px">
+            <div style="background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+              <h4 style="margin-top:0">Sales Office</h4>
+              <div style="color:var(--muted)">Oakwood Road, Block C, Near City Park<br>Mon–Sat 9:30AM–6:30PM</div>
+              <div style="margin-top:10px"><strong>Phone</strong><div style="color:var(--accent)">+91 98765 43210</div></div>
+              <div style="margin-top:8px"><strong>Email</strong><div style="color:var(--muted)">sales@silverrise.example</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>&copy; SilverRise Residences <span id="year"></span></div>
+        <div style="color:var(--muted)">Designed with care • Privacy · Terms</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ====== Demo data ======
+    const DATA = [
+      {id:1,title:'1 BHK Cozy Corner',type:'1 BHK',size:550,price:1400000,img:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=60',beds:1,baths:1},
+      {id:2,title:'2 BHK Skyline',type:'2 BHK',size:1200,price:2850000,img:'https://images.unsplash.com/photo-1560184897-6a6f6a6f6a6f?auto=format&fit=crop&w=1200&q=60',beds:2,baths:2},
+      {id:3,title:'3 BHK Family Suite',type:'3 BHK',size:1450,price:4200000,img:'https://images.unsplash.com/photo-1598300103359-7a6f2b4f7c66?auto=format&fit=crop&w=1200&q=60',beds:3,baths:2},
+      {id:4,title:'Studio Urban',type:'1 BHK',size:420,price:1100000,img:'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=60',beds:1,baths:1},
+      {id:5,title:'Loft Prime',type:'2 BHK',size:980,price:2600000,img:'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1200&q=60',beds:2,baths:2},
+      {id:6,title:'Garden View 2BHK',type:'2 BHK',size:1100,price:2980000,img:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=60',beds:2,baths:2}
+    ];
+
+    function mkCard(item){
+      return `
+        <div class="card">
+          <div class="media" style="background-image:url('${item.img}')"></div>
+          <div class="card-body">
+            <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${item.title}</strong><div style="font-size:13px;color:var(--muted)">${item.type} • ${item.size} sq.ft</div></div><div class="price">₹ ${Number(item.price).toLocaleString('en-IN')}</div></div>
+            <div class="meta"><div>${item.beds} Beds</div><div>${item.baths} Baths</div><div>Parking</div></div>
+            <div style="margin-top:12px;display:flex;gap:8px"><button class="btn" onclick="book(${item.id})">Book visit</button><button class="ghost">Details</button></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function render(list){
+      const wrap = document.getElementById('cards'); wrap.innerHTML = list.map(mkCard).join('');
+    }
+
+    function filterListings(){
+      const type = document.getElementById('type').value;
+      const budget = Number(document.getElementById('budget').value || Infinity);
+      const out = DATA.filter(d => (type==='Any' || d.type===type) && d.price<=budget);
+      render(out);
+    }
+
+    function book(id){
+      const unit = DATA.find(d=>d.id===id);
+      alert('Thanks! We will call you about ' + unit.title);
+    }
+
+    function submitEnquiry(e){
+      e.preventDefault();
+      const name=document.getElementById('cname').value;
+      const email=document.getElementById('cemail').value;
+      const msg=document.getElementById('cmsg').value;
+      // In a real project you'd send this to a server. For the template we simply show a toast.
+      alert(`Thanks ${name}! We'll get back to ${email}.`);
+      e.target.reset();
+    }
+
+    function scrollToContact(){
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    }
+
+    // init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    render(DATA);
+  </script>
+</body>
+</html>
